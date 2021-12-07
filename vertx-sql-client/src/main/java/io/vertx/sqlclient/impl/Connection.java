@@ -47,6 +47,15 @@ public interface Connection extends CommandScheduler  {
 
   int getSecretKey();
 
+  /**
+   * throws UnsupportedOperationException if unwrap is not implemented by its subclass
+   * @param <N>
+   * @return
+   */
+  default <N> N unwrap() {
+    throw new UnsupportedOperationException("sql-client api Implementation doesn't support this operation");
+  }
+
   interface Holder {
 
     void handleEvent(Object event);

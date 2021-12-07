@@ -17,19 +17,19 @@
 
 package io.vertx.sqlclient.impl;
 
+import io.vertx.core.AsyncResult;
+import io.vertx.core.Future;
+import io.vertx.core.Handler;
+import io.vertx.core.Promise;
 import io.vertx.core.impl.ContextInternal;
 import io.vertx.core.impl.future.PromiseInternal;
 import io.vertx.core.spi.metrics.ClientMetrics;
-import io.vertx.sqlclient.PrepareOptions;
-import io.vertx.sqlclient.PreparedStatement;
 import io.vertx.sqlclient.SqlConnection;
-import io.vertx.sqlclient.impl.command.CommandBase;
 import io.vertx.sqlclient.Transaction;
-
-import io.vertx.core.*;
+import io.vertx.sqlclient.impl.command.CommandBase;
 import io.vertx.sqlclient.impl.tracing.QueryTracer;
-import io.vertx.sqlclient.spi.DatabaseMetadata;
 import io.vertx.sqlclient.spi.ConnectionFactory;
+import io.vertx.sqlclient.spi.DatabaseMetadata;
 
 /**
  * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
@@ -144,6 +144,11 @@ public class SqlConnectionImpl<C extends SqlConnection> extends SqlConnectionBas
   @Override
   public void close(Handler<AsyncResult<Void>> handler) {
     close(promise(handler));
+  }
+
+  @Override
+  public <N> N unwrap() {
+    return conn.unwrap();
   }
 
   private void close(Promise<Void> promise) {

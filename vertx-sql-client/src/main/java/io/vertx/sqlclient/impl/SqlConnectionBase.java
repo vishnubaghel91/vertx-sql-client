@@ -47,7 +47,7 @@ public abstract class SqlConnectionBase<C extends SqlClient> extends SqlClientBa
     return factory;
   }
 
-  public Connection unwrap() {
+  public Connection getConnection() {
     return conn;
   }
 

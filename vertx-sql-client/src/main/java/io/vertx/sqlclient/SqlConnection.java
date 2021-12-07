@@ -24,6 +24,8 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.sqlclient.spi.DatabaseMetadata;
 
+import java.sql.Connection;
+
 /**
  * A connection to the database server.
  *
@@ -109,4 +111,9 @@ public interface SqlConnection extends SqlClient {
    */
   DatabaseMetadata databaseMetadata();
 
+  /**
+   * @param
+   * @return underlying java.sql.Connection
+   */
+  <N> N unwrap();
 }
